@@ -1,0 +1,27 @@
+@import '../../lib/materialize-src/sass/materialize.scss';
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    #app {
+        flex: 1 0 auto;
+        .results-pagination {
+            width: fit-content;
+        }
+        #search-bar-wrapper {
+            margin-top: 1rem;
+        }
+        #search-wrapper {
+            .result-details {
+                li {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    span:first-child {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

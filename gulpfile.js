@@ -20,9 +20,9 @@ gulp.task('scripts', function () {
     gulp.src('./dist/js', { read: false })
         .pipe(clean());
     return browserify({
-        basedir: '.',
+        basedir: './',
         debug: true,
-        entries: ['src/app.ts'],
+        entries: ['./src/app.ts'],
         cache: {},
         packageCache: {}
     })
@@ -47,14 +47,19 @@ gulp.task('copy-html', ['clean'], function () {
 });
 
 gulp.task('copy-fonts', ['clean'], function () {
-    return gulp.src('./lib/materialize/fonts/roboto/**/*')
-        .pipe(gulp.dest('dist/fonts/roboto'));
+    return gulp.src('./lib/materialize-src/fonts/**/*')
+        .pipe(gulp.dest('dist/fonts'));
 });
+
+gulp.task('copy-libs', ['clean'], function () {
+    return gulp.src(['./lib/jquery.min.js', './lib/materialize-src/js/bin/materialize.min.js'])
+        .pipe(gulp.dest('dist/lib/js'));
+})
 
 gulp.task('styles', function () {
     gulp.src('./dist/css', { read: false })
         .pipe(clean());
-    return gulp.src('./src/styles/**/*.scss')
+    return gulp.src('./src/styles/app.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(rename('styles.css'))
@@ -62,11 +67,11 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('assets', ['copy-html', 'copy-fonts']);
-gulp.task('build', ['assets', 'scripts', 'styles']);
+gulp.task('assets', ['copy-html', 'copy-fonts', 'copy-libs']);
+gulp.task('build-all', ['assets', 'scripts', 'styles']);
 
-gulp.task('dev', ['build'], function () {
+gulp.task('dev', ['scripts', 'styles'], function () {
     gulp.watch(['./src/**/*.ts', './src/templates/**/*.html'], ['scripts']);
-    gulp.watch(['../src/**/*.scss'], ['styles']);
+    gulp.watch(['./src/**/*.scss'], ['styles']);
 });
 

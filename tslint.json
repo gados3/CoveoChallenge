@@ -1,0 +1,22 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "no-any": false,
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape",
+            "jsx-double"
+        ],
+        "indent": [
+            true,
+            "tabs",
+            4
+        ],
+        "no-console": [
+            false
+        ],
+        "no-var-requires": false,
+        "trailing-comma": false
+    }
+}

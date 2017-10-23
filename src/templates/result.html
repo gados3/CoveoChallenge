@@ -1,0 +1,65 @@
+<div class="card-image">
+    <img src="<%= raw.tpthumbnailuri %>" class="responsive-img">
+</div>
+<div class="card-stacked">
+    <div class="card-content">
+        <span class="card-title">
+            <%= Title %>
+        </span>
+        <div class="row">
+            <div class="col s12 m4">
+                <ul class="result-details">
+                    <li>
+                        <span>Category</span>
+                        <span>
+                            <%= raw.tpcategorie %>
+                        </span>
+                    </li>
+                    <li>
+                        <span>Origin</span>
+                        <span>
+                            <%  if (raw.tpregion) { 
+                                    print(raw.tpregion + ',&nbsp;'); 
+                                }   
+                                print(raw.tppays); 
+                            %>
+                        </span>
+                    </li>
+                    <% if (raw.tpmillesime) { %>
+                        <li>
+                            <span>Year</span>
+                            <span>
+                                <%= raw.tpmillesime %>
+                            </span>
+                        </li>
+                        <% } %>
+                            <li>
+                                <span>Price</span>
+                                <span>
+                                    <%= raw.tpprixnormal %>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Volume</span>
+                                <span>
+                                    <%= raw.tpformat %>
+                                </span>
+                            </li>
+                </ul>
+            </div>
+            <div class="col s12 m6 offset-m2">
+                <p>
+                    <%  if(raw.tpnotededegustation) { 
+                            print(raw.tpnotededegustation); 
+                        } else {
+                            print(Excerpt); 
+                        } 
+                    %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-action">
+        <a href="<%= Uri %>" class="right">official website</a>
+    </div>
+</div>
