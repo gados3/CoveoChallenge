@@ -12,7 +12,7 @@ export class ResultView extends Backbone.View<Result> {
 
 	constructor(options?) {
 		super($.extend(true, {
-			className: 'card horizontal small',
+			className: 'col s12 m6 l4 xl3 result',
 		}, options));
 	}
 

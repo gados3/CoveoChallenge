@@ -12,13 +12,27 @@ body {
             margin-top: 1rem;
         }
         #search-wrapper {
-            .result-details {
-                li {
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    span:first-child {
-                        font-weight: bold;
+            #results {
+                .result {
+                    @media #{$medium-and-up} {
+                        padding: 1rem;
+                    }
+                    img {
+                        bottom: unset;
+                        max-width: 100%;
+                        max-height: -webkit-fill-available;
+                        margin: 0 auto;
+                        width: unset;
+                    }
+                    .result-details {
+                        li {
+                            display: flex;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                            span:first-child {
+                                font-weight: bold;
+                            }
+                        }
                     }
                 }
             }
