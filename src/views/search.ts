@@ -10,7 +10,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 
 	private static template = _.template(tpl);
 	public pageCount: number;
-	public pageLength = 10;
+	public pageLength = 12;
 	public currentPage = 0;
 	private paginationLength = 5;
 	private query = new Query();

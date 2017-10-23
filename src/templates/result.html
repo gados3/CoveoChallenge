@@ -26,10 +26,10 @@
             <li>
                 <span>Origin</span>
                 <span>
-                    <%  if (raw.tpregion) { 
-                            print(raw.tpregion + ',&nbsp;'); 
+                    <% print(raw.tppays); 
+                        if (raw.tpregion) { 
+                            print('&nbsp;[' + raw.tpregion + ']'); 
                         }   
-                        print(raw.tppays); 
                     %>
                 </span>
             </li>
@@ -54,7 +54,43 @@
                         </span>
                     </li>
         </ul>
-
+        <div class="row">
+            <p>
+                <% if (raw.tpobservationsgustativestexture) { %>
+                    <span class="badge teal lighten-1">
+                        <%= raw.tpobservationsgustativestexture %>
+                    </span>
+                    <% } %>
+            </p>
+            <p>
+                <% if (raw.tpobservationsgustativescorps) { %>
+                    <span class="badge purple lighten-1">
+                        <%= raw.tpobservationsgustativescorps %>
+                    </span>
+                    <% } %>
+            </p>
+            <p>
+                <% if (raw.tpobservationsgustativesacidite) { %>
+                    <span class="badge orange darken-4">Acidité&nbsp;
+                        <%= raw.tpobservationsgustativesacidite %>
+                    </span>
+                    <% } %>
+            </p>
+            <p>
+                <% if (raw.tppastilledegout) { %>
+                    <span class="badge light-blue darken-3">Acidité&nbsp;
+                        <%= raw.tppastilledegout %>
+                    </span>
+                    <% } %>
+            </p>
+            <p>
+                <% if (raw.tpobservationsgustativestannins) { %>
+                    <span class="badge brown darken-1">Tannins&nbsp;
+                        <%= raw.tpobservationsgustativestannins %>
+                    </span>
+                    <% } %>
+            </p>
+        </div>
         <div class="row">
             <p>
                 <%  if(raw.tpnotededegustation) { 
@@ -63,12 +99,6 @@
                         print(Excerpt); 
                     } 
                 %>
-            </p>
-        </div>
-        <div class="row">
-            <p>
-                <span class="badge new">badge 1</span>
-                <span class="badge">badge 2</span>
             </p>
         </div>
     </div>
