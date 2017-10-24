@@ -1,3 +1,21 @@
+<% if (data.totalCount > 0) { %>
+    <p class="col s12 right-align">
+        <%= data.totalCount %>&nbsp;results found in&nbsp;
+            <%= data.duration / 1000 %>&nbsp;seconds.
+    </p>
+<% } else { %>
+    <% if (data.queryCorrections.length > 0) { %>
+        <div class="row">
+            <p class="flow-text">Did you mean
+                <a class="qcorrection" data-query="<%= data.queryCorrections[0].correctedQuery %>">
+                    <%= data.queryCorrections[0].correctedQuery %>
+                </a>?
+            </p>
+        </div>
+    <% } else { %>
+        <p class="flow-text">Query returned no results.</p>
+    <% } %>
+<% } %>
 <div id="results" class="row"></div>
 <ul class="pagination row results-pagination">
     <li class="<%= (currentPage === 0) ? 'disabled' : 'waves-effect' %>">
@@ -11,10 +29,10 @@
                 <%= i %>
             </a>
         </li>
-        <% } %>
-            <li class="<%= (currentPage === pageCount) ? 'disabled' : 'waves-effect' %>">
-                <a class="next-page-btn">
-                    <i class="material-icons">chevron_right</i>
-                </a>
-            </li>
+    <% } %>
+    <li class="<%= (currentPage === pageCount) ? 'disabled' : 'waves-effect' %>">
+        <a class="next-page-btn">
+            <i class="material-icons">chevron_right</i>
+        </a>
+    </li>
 </ul>

@@ -12,17 +12,23 @@ body {
             margin-top: 1rem;
         }
         #search-wrapper {
+            .qcorrection {
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
             #results {
                 .result {
                     @media #{$medium-and-up} {
                         padding: 1rem;
                     }
                     img {
-                        bottom: unset;
+                        bottom: 0;
                         max-width: 100%;
-                        max-height: -webkit-fill-available;
                         margin: 0 auto;
                         width: unset;
+                        max-height: -webkit-fill-available
                     }
                     .result-details {
                         li {

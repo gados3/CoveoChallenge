@@ -1,8 +1,8 @@
 import * as Backbone from 'backbone';
 import * as _ from 'underscore';
+import { CriteriasView } from './criterias';
 import { SeachView } from './search';
 import { SearchBarView } from './searchBar';
-import { CriteriasView } from './criterias';
 
 let tpl: string = require('../templates/app.html');
 
@@ -18,7 +18,10 @@ export class AppView extends Backbone.View<Backbone.Model> {
 		this.$el.html(AppView.template());
 		new CriteriasView().render();
 		let searchResults = new SeachView();
-		new SearchBarView(searchResults.search.bind(searchResults)).render();
+		new SearchBarView(
+			searchResults.userSearch.bind(searchResults),
+			searchResults.changeSortCriteria.bind(searchResults)
+		).render();
 		searchResults.render();
 		return this;
 	}

@@ -7,8 +7,9 @@ export class SearchBarView extends Backbone.View<Backbone.Model> {
 
 	private static template = _.template(tpl);
 	private searchCallback: (s: string) => any;
+	private sortCallback: (s: string) => any;
 
-	constructor(searchCallback, options?) {
+	constructor(searchCallback, sortCallback, options?) {
 		super($.extend(true, {
 			el: '#search-bar-wrapper',
 			events: {
@@ -16,14 +17,20 @@ export class SearchBarView extends Backbone.View<Backbone.Model> {
 			}
 		}, options));
 		this.searchCallback = searchCallback;
+		this.sortCallback = sortCallback;
 	}
 
 	public render() {
 		this.$el.append(SearchBarView.template());
+		$('#sortCriteria select').material_select(this.sortCriteriaChange.bind(this));
 		return this;
 	}
 
 	public inputChange(e) {
 		this.searchCallback(escape(e.target.value));
+	}
+
+	public sortCriteriaChange() {
+		this.sortCallback(<string>$('#sortCriteria select').val());
 	}
 }

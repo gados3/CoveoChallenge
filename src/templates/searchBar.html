@@ -3,6 +3,12 @@
     <input id="search-bar" type="search">
     <label for="search-bar">Search SAQ</label>
 </div>
-<div class="col s12 m4 l3">
-    <p>Sort by</p>
+<div class="input-field col s12 m4 l3" id="sortCriteria">
+    <select>
+        <option value="Relevancy" selected>Relevancy</option>
+        <option value="DateDescending">Newest first</option>
+        <option value="@tpprixnum ascending">Price: cheapest first</option>
+        <option value="@tpprixnum descending">Price: highest first</option>
+    </select>
+    <label>Sort by:</label>
 </div>

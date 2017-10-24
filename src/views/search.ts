@@ -13,8 +13,8 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 	public pageLength = 12;
 	public currentPage = 0;
 	private paginationLength = 5;
+	private currentQuery = {};
 	private query = new Query();
-	private queryString = '';
 
 	constructor(options?) {
 		super($.extend(true, {
@@ -22,35 +22,50 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 			events: {
 				'click .next-page-btn': 'nextPage',
 				'click .page-btn': 'goToPage',
-				'click .prev-page-btn': 'previousPage'
+				'click .prev-page-btn': 'previousPage',
+				'click .qcorrection': 'searchDidYouMean'
 			}
 		}, options));
 	}
 
-	public render(): SeachView {
-		this.query.search({
+	public render(options?): SeachView {
+		$.extend(true, this.currentQuery, options);
+		this.query.search($.extend(true, {
 			firstResult: this.currentPage * this.pageLength,
-			numberOfResults: this.pageLength,
-			q: this.queryString
-		}).done((response) => {
-			this.pageCount = response.totalCount / this.pageLength;
-			this.$el.html(SeachView.template({
-				currentPage: this.currentPage,
-				pageCount: this.pageCount,
-				paginationMax: Math.min(this.pageCount, this.currentPage + this.paginationLength),
-				paginationMin: Math.max(0, this.currentPage - this.paginationLength),
-			}));
-			this.query.each((model) => {
-				let result = new ResultView({ model });
-				this.$el.find('#results').append(result.render().el);
+			numberOfResults: this.pageLength
+		}, this.currentQuery))
+			.done((response) => {
+				this.pageCount = response.totalCount / this.pageLength;
+				this.$el.html(SeachView.template({
+					currentPage: this.currentPage,
+					data: response,
+					pageCount: this.pageCount,
+					paginationMax: Math.min(this.pageCount, this.currentPage + this.paginationLength),
+					paginationMin: Math.max(0, this.currentPage - this.paginationLength)
+				}));
+				this.query.each((model) => {
+					let result = new ResultView({ model });
+					this.$el.find('#results').append(result.render().el);
+				});
 			});
-		});
 		return this;
 	}
 
-	public search(query: string) {
-		this.queryString = query;
-		this.render();
+	public searchDidYouMean(e) {
+		this.userSearch($(e.target).data('query'));
+	}
+
+	public progSearch(query: string) {
+		this.render({
+			aq: query
+		});
+	}
+
+	public userSearch(query: string) {
+		this.render({
+			enableDidYouMean: true,
+			q: escape(query)
+		});
 	}
 
 	public nextPage(e) {
@@ -77,4 +92,9 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 		this.render();
 	}
 
+	public changeSortCriteria(criteria: string) {
+		this.render({
+			sortCriteria: criteria
+		});
+	}
 }
