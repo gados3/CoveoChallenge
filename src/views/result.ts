@@ -1,12 +1,11 @@
 import * as Backbone from 'backbone';
 import * as $ from 'jquery';
 import * as _ from 'underscore';
-import { Query } from '../collections/query';
-import { Result } from '../models/result';
+import { ResultModel } from '../models/result';
 
 let tpl: string = require('../templates/result.html');
 
-export class ResultView extends Backbone.View<Result> {
+export class ResultView extends Backbone.View<ResultModel> {
 
 	private static template = _.template(tpl);
 

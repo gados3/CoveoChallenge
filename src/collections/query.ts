@@ -1,12 +1,12 @@
 import * as Backbone from 'backbone';
-import { Result } from '../models/result';
-import * as Auth from '../utils/auth';
 import * as $ from 'jquery';
+import { ResultModel } from '../models/result';
+import * as Auth from '../utils/auth';
 
-export class Query extends Backbone.Collection<Result> {
+export class QueryCollection extends Backbone.Collection<ResultModel> {
 
 	private static baseUrl = 'https://cloudplatform.coveo.com/rest/search';
-	public model = Result;
+	public model = ResultModel;
 
 	public parse(response: any) {
 		return response.results;
@@ -14,7 +14,7 @@ export class Query extends Backbone.Collection<Result> {
 
 	public search(params?): JQueryXHR {
 		let query = (params) ? '?' + $.param(params) : '';
-		this.url = Query.baseUrl + query;
+		this.url = QueryCollection.baseUrl + query;
 		return this.fetch({
 			beforeSend: Auth.setHeader
 		});

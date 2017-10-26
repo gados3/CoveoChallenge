@@ -1,7 +1,7 @@
 import * as Backbone from 'backbone';
 import * as $ from 'jquery';
 import * as _ from 'underscore';
-import { Query } from '../collections/query';
+import { QueryCollection } from '../collections/query';
 import { ResultView } from '../views/result';
 
 let tpl: string = require('../templates/search.html');
@@ -14,7 +14,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 	public currentPage = 0;
 	private paginationLength = 5;
 	private currentQuery = {};
-	private query = new Query();
+	private query = new QueryCollection();
 
 	constructor(options?) {
 		super($.extend(true, {
