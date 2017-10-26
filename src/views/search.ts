@@ -47,6 +47,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 					let result = new ResultView({ model });
 					this.$el.find('#results').append(result.render().el);
 				});
+				window.scrollTo(0, 0);
 			});
 		return this;
 	}
@@ -93,6 +94,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 	}
 
 	public changeSortCriteria(criteria: string) {
+		this.currentPage = 0;
 		this.render({
 			sortCriteria: criteria
 		});
