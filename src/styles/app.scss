@@ -18,6 +18,12 @@ body {
                     text-decoration: underline;
                 }
             }
+            .results-count-btn {
+                text-align: center;
+                &:hover {
+                    @extend .z-depth-3;
+                }
+            }
             #results {
                 .result {
                     @media #{$medium-and-up} {
@@ -51,4 +57,12 @@ body {
             }
         }
     }
+}
+
+.fixed-action-btn.horizontal {
+    position: relative;
+}
+
+.fixed-action-btn.horizontal ul {
+    right: 45px;
 }

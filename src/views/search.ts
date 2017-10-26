@@ -23,7 +23,8 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 				'click .next-page-btn': 'nextPage',
 				'click .page-btn': 'goToPage',
 				'click .prev-page-btn': 'previousPage',
-				'click .qcorrection': 'searchDidYouMean'
+				'click .qcorrection': 'searchDidYouMean',
+				'click .results-count-btn': 'changePageLength'
 			}
 		}, options));
 	}
@@ -48,6 +49,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 					this.$el.find('#results').append(result.render().el);
 				});
 				window.scrollTo(0, 0);
+				console.log($('.tooltipped'));
 			});
 		return this;
 	}
@@ -88,8 +90,8 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 		this.render();
 	}
 
-	public changePageLength(pageLength: number) {
-		this.pageLength = pageLength;
+	public changePageLength(e) {
+		this.pageLength = $(e.target).data('count');
 		this.render();
 	}
 

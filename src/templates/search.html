@@ -1,7 +1,16 @@
 <% if (data.totalCount > 0) { %>
-    <p class="col s12 right-align">
+    <div class="fixed-action-btn horizontal click-to-toggle">
+        <a class="btn-floating materialize-red lighten-2 right tooltipped" data-position="bottom" data-tooltip="Number of results displayed"><i class="material-icons">view_module</i></a>
+        <ul>
+            <a class="results-count-btn btn-floating" data-count="96">96</a>
+            <a class="results-count-btn btn-floating" data-count="48">48</a>
+            <a class="results-count-btn btn-floating" data-count="24">24</a>
+            <a class="results-count-btn btn-floating" data-count="12">12</a>
+        </ul>
+    </div>
+    <p>
         <%= data.totalCount %>&nbsp;results found in&nbsp;
-            <%= data.duration / 1000 %>&nbsp;seconds.
+        <%= data.duration / 1000 %>&nbsp;seconds.
     </p>
 <% } else { %>
     <% if (data.queryCorrections.length > 0) { %>
