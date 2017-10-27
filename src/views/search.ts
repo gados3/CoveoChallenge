@@ -1,55 +1,50 @@
 import * as Backbone from 'backbone';
 import * as $ from 'jquery';
 import * as _ from 'underscore';
-import { QueryCollection } from '../collections/query';
+import { ResultCollection } from '../collections/result';
 import { ResultView } from '../views/result';
+import { PaginationView } from './pagination';
 
 let tpl: string = require('../templates/search.html');
 
 export class SeachView extends Backbone.View<Backbone.Model> {
 
 	private static template = _.template(tpl);
-	public pageCount: number;
 	public pageLength = 12;
 	public currentPage = 0;
-	private paginationLength = 5;
+
 	private currentQuery = {};
-	private query = new QueryCollection();
+	private results = new ResultCollection();
+	private pagination: PaginationView;
 
 	constructor(options?) {
 		super($.extend(true, {
 			el: '#search-wrapper',
 			events: {
-				'click .next-page-btn': 'nextPage',
-				'click .page-btn': 'goToPage',
-				'click .prev-page-btn': 'previousPage',
 				'click .qcorrection': 'searchDidYouMean',
 				'click .results-count-btn': 'changePageLength'
 			}
 		}, options));
+		this.init();
 	}
+
 
 	public render(options?): SeachView {
 		$.extend(true, this.currentQuery, options);
-		this.query.search($.extend(true, {
-			firstResult: this.currentPage * this.pageLength,
+		this.results.search($.extend(true, {
+			firstResult: this.pagination.currentPage * this.pageLength,
 			numberOfResults: this.pageLength
 		}, this.currentQuery))
 			.done((response) => {
-				this.pageCount = response.totalCount / this.pageLength;
+				this.pagination.render(response.totalCount / this.pageLength);
 				this.$el.html(SeachView.template({
-					currentPage: this.currentPage,
 					data: response,
-					pageCount: this.pageCount,
-					paginationMax: Math.min(this.pageCount, this.currentPage + this.paginationLength),
-					paginationMin: Math.max(0, this.currentPage - this.paginationLength)
 				}));
-				this.query.each((model) => {
+				this.results.each((model) => {
 					let result = new ResultView({ model });
-					this.$el.find('#results').append(result.render().el);
+					this.$el.find('#results-wrapper').append(result.render().el);
 				});
 				window.scrollTo(0, 0);
-				console.log($('.tooltipped'));
 			});
 		return this;
 	}
@@ -71,25 +66,6 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 		});
 	}
 
-	public nextPage(e) {
-		if (this.currentPage <= this.pageCount) {
-			this.currentPage++;
-			this.render();
-		}
-	}
-
-	public previousPage(e) {
-		if (this.currentPage > 0) {
-			this.currentPage--;
-			this.render();
-		}
-	}
-
-	public goToPage(e) {
-		this.currentPage = $(e.target).data('page-nbr');
-		this.render();
-	}
-
 	public changePageLength(e) {
 		this.pageLength = $(e.target).data('count');
 		this.render();
@@ -100,5 +76,9 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 		this.render({
 			sortCriteria: criteria
 		});
+	}
+
+	private init() {
+		this.pagination = new PaginationView(this);
 	}
 }

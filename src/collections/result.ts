@@ -3,7 +3,7 @@ import * as $ from 'jquery';
 import { ResultModel } from '../models/result';
 import * as Auth from '../utils/auth';
 
-export class QueryCollection extends Backbone.Collection<ResultModel> {
+export class ResultCollection extends Backbone.Collection<ResultModel> {
 
 	private static baseUrl = 'https://cloudplatform.coveo.com/rest/search';
 	public model = ResultModel;
@@ -13,8 +13,8 @@ export class QueryCollection extends Backbone.Collection<ResultModel> {
 	}
 
 	public search(params?): JQueryXHR {
-		let query = (params) ? '?' + $.param(params) : '';
-		this.url = QueryCollection.baseUrl + query;
+		let query = (params) ? '?fieldsToExclude=["tppagebody","tpinventairetypenomsuccursalerawsplitgroup"]&' + $.param(params) : '';
+		this.url = ResultCollection.baseUrl + query;
 		return this.fetch({
 			beforeSend: Auth.setHeader
 		});

@@ -1,0 +1,19 @@
+<ul class="pagination results-pagination">
+    <li class="<%= (currentPage === 0) ? 'disabled' : 'waves-effect' %>">
+        <a class="prev-page-btn">
+            <i class="material-icons">chevron_left</i>
+        </a>
+    </li>
+    <% for(var i = paginationMin; i <= paginationMax; i++) { %>
+        <li class="<%= (currentPage === i) ? 'active' : 'waves-effect' %>">
+            <a class="page-btn" data-page-nbr="<%= i %>">
+                <%= i %>
+            </a>
+        </li>
+    <% } %>
+    <li class="<%= (currentPage === pageCount) ? 'disabled' : 'waves-effect' %>">
+        <a class="next-page-btn">
+            <i class="material-icons">chevron_right</i>
+        </a>
+    </li>
+</ul>
