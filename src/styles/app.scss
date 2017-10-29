@@ -1,68 +1,89 @@
 @import '../../lib/materialize-src/sass/materialize.scss';
-body {
+@import './_pagination.scss';
+$footer-height: 200px;
+$nav-height: 65px;
+html {
+    overflow: hidden;
+}
+
+#app {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    #app {
-        flex: 1 0 auto;
-        .results-pagination {
-            width: fit-content;
-        }
-        #search-bar-wrapper {
-            margin-top: 1rem;
-        }
-        #search-wrapper {
-            .qcorrection {
-                cursor: pointer;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-            .results-count-btn {
-                text-align: center;
-                &:hover {
-                    @extend .z-depth-3;
-                }
-            }
-            #results {
-                .result {
-                    @media #{$medium-and-up} {
-                        padding: 1rem;
-                    }
-                    img {
-                        bottom: 0;
-                        max-width: 100%;
-                        margin: 0 auto;
-                        width: unset;
-                        max-height: -webkit-fill-available
-                    }
-                    .result-details {
-                        li {
-                            display: flex;
-                            justify-content: space-between;
-                            flex-wrap: wrap;
-                            span:first-child {
-                                font-weight: bold;
-                            }
-                        }
-                    }
-                    .badge:not(.new) {
-                        font-weight: 300;
-                        font-size: 0.8rem;
-                        color: #fff;
-                        border-radius: 2px;
-                        margin: 3px;
-                    }
-                }
-            }
+}
+
+#content {
+    margin-top: 2px;
+    margin-bottom: 0;
+    flex: 1 0 auto;
+}
+
+#search-wrapper {
+    .qcorrection {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
         }
     }
 }
 
-.fixed-action-btn.horizontal {
-    position: relative;
+#search-bar-wrapper {
+    margin-top: 1rem;
 }
 
-.fixed-action-btn.horizontal ul {
-    right: 45px;
+#facets-wrapper {
+    overflow-y: auto;
+    max-height: calc(100vh - #{$nav-height});
+    .collapsible-body {
+        padding: 0;
+    }
+}
+
+#right-content {
+    overflow-y: auto;
+    max-height: calc(100vh - #{$nav-height});
+}
+
+#results-wrapper {
+    .result {
+        .large {
+            @media #{$small-and-down} {
+                height: 500px;
+            }
+            @media #{$medium-and-up} {
+                height: 400px;
+            }
+            @media #{$extra-large-and-up} {
+                height: 500px;
+            }
+        }
+        img {
+            bottom: 0;
+            max-width: 100%;
+            margin: 0 auto;
+            width: unset;
+            max-height: -webkit-fill-available
+        }
+        .result-details {
+            li {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                span:first-child {
+                    font-weight: bold;
+                }
+            }
+        }
+        .badge:not(.new) {
+            font-weight: 300;
+            font-size: 0.8rem;
+            color: #fff;
+            border-radius: 2px;
+            margin: 3px;
+        }
+    }
+}
+
+.page-footer {
+    margin-top: 100px;
 }

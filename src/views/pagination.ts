@@ -19,13 +19,14 @@ export class PaginationView extends Backbone.View<Backbone.Model> {
 
 	constructor(parent: SeachView, options?) {
 		super($.extend(true, {
-			el: '#pagination-wrapper',
+			el: '.pagination-wrapper',
 			events: {
 				'click .next-page-btn': 'nextPage',
 				'click .page-btn': 'goToPage',
 				'click .prev-page-btn': 'previousPage'
 			}
 		}, options));
+		this.parent = parent;
 	}
 
 	public render(pageCount?: number | undefined) {
@@ -49,20 +50,20 @@ export class PaginationView extends Backbone.View<Backbone.Model> {
 	public nextPage(e) {
 		if (this._currentPage <= this.pageCount) {
 			this._currentPage++;
-			this.parent.goToPage(this._currentPage);
+			this.parent.render();
 		}
 	}
 
 	public previousPage(e) {
 		if (this._currentPage > 0) {
 			this._currentPage--;
-			this.parent.goToPage(this._currentPage);
+			this.parent.render();
 		}
 	}
 
 	public goToPage(e) {
 		this._currentPage = $(e.target).data('page-nbr');
-		this.parent.goToPage(this._currentPage);
+		this.parent.render();
 	}
 
 }

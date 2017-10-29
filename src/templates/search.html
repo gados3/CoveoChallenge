@@ -1,23 +1,23 @@
-<% if (data.totalCount > 0) { %>
-    <div class="fixed-action-btn horizontal click-to-toggle">
+<% if (totalCount > 0) { %>
+    <div class="fixed-action-btn horizontal click-to-toggle results-count-wrapper">
         <a class="btn-floating materialize-red lighten-2 right tooltipped" data-position="bottom" data-tooltip="Number of results displayed"><i class="material-icons">view_module</i></a>
         <ul>
-            <a class="results-count-btn btn-floating" data-count="96">96</a>
-            <a class="results-count-btn btn-floating" data-count="48">48</a>
-            <a class="results-count-btn btn-floating" data-count="24">24</a>
-            <a class="results-count-btn btn-floating" data-count="12">12</a>
+            <a class="btn-floating" data-count="96">96</a>
+            <a class="btn-floating" data-count="48">48</a>
+            <a class="btn-floating" data-count="24">24</a>
+            <a class="btn-floating" data-count="12">12</a>
         </ul>
     </div>
     <p>
-        <%= data.totalCount %>&nbsp;results found in&nbsp;
-        <%= data.duration / 1000 %>&nbsp;seconds.
+        <%= totalCount %>&nbsp;results found in&nbsp;
+        <%= duration / 1000 %>&nbsp;seconds.
     </p>
 <% } else { %>
-    <% if (data.queryCorrections.length > 0) { %>
+    <% if (queryCorrections.length > 0) { %>
         <div class="row">
             <p class="flow-text">Did you mean
-                <a class="qcorrection" data-query="<%= data.queryCorrections[0].correctedQuery %>">
-                    <%= data.queryCorrections[0].correctedQuery %>
+                <a class="qcorrection" data-query="<%= queryCorrections[0].correctedQuery %>">
+                    <%= queryCorrections[0].correctedQuery %>
                 </a>?
             </p>
         </div>

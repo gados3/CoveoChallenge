@@ -1,4 +1,22 @@
-<div class="section">
-    <h6>Price Range</h6>
-</div>
-<div class="divider"></div>
+<% if (models.length > 0) { %>
+    <li>
+        <div class="collapsible-header">
+            <%= sectionTitle %>
+        </div>
+        <div class="collapsible-body">
+            <ul class="collection">
+                <% _.each(models, function(value) { %>
+                    <li class="collection-item">
+                        <input type="checkbox" name="<% print('facet'); %>" id="<% print('facet_' + field + '_' + value.get('value')); %>" data-field="<%= field %>" data-query="<%= value.get('value') %>">
+                        <label for="<% print('facet_' + field + '_' + value.get('value')); %>">
+                            <%= value.get('value') %>
+                        </label>
+                        <span class="badge">
+                            <%= value.get('numberOfResults') %>
+                        </span>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    </li>
+<% } %>

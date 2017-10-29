@@ -1,6 +1,5 @@
 import * as Backbone from 'backbone';
 import * as _ from 'underscore';
-import { FacetView } from './criterias';
 import { SeachView } from './search';
 import { SearchBarView } from './searchBar';
 
@@ -15,13 +14,18 @@ export class AppView extends Backbone.View<Backbone.Model> {
 	}
 
 	public render(): AppView {
-		let searchResults = new SeachView();
 		this.$el.html(AppView.template());
+		let searchResults = new SeachView(this);
 		new SearchBarView(
 			searchResults.userSearch.bind(searchResults),
 			searchResults.changeSortCriteria.bind(searchResults)
 		).render();
 		searchResults.render();
 		return this;
+	}
+
+	public initializeComponents() {
+		$('.collapsible').collapsible();
+		$('.tooltipped').tooltip();
 	}
 }

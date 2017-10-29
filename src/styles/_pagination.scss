@@ -1,0 +1,17 @@
+.results-pagination {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.results-count-wrapper {
+    position: relative;
+    ul {
+        right: 45px;
+        a {
+            text-align: center;
+            &:hover {
+                @extend .z-depth-3;
+            }
+        }
+    }
+}
