@@ -6,6 +6,14 @@
 
 // Google Color Palette defined: http://www.google.com/design/spec/style/color.html
 
+$saq-purple: ( 
+  "base" : #7c1e3c, 
+  "lighten-3" : #C86D8A, 
+  "lighten-2" : #B52C58, 
+  "lighten-1" : #942448, 
+  "darken-1" : #3C0F1D, 
+  "secondary": #f25941
+);
 
 $materialize-red: (
   "base":       #e51c23,
@@ -338,6 +346,7 @@ $shades: (
 );
 
 $colors: (
+  "saq-purple": $saq-purple,
   "materialize-red": $materialize-red,
   "red": $red,
   "pink": $pink,
