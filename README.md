@@ -23,7 +23,7 @@
 * Results details
 
 ## Known issues
-* Haven't been able to setup Karma + Jasmine in combination with Gulp properly just yet. So the tests aren't runnable.
+* Haven't been able to setup Karma + Jasmine with TypeScript properly just yet. So the tests aren't runnable.
 * Facets behavior isn't rock solid
 * Facets menu displays after footer on small devices
 * Gulp task to build for prod on Salesforce isn't implemented just yet (build-dev is used)
