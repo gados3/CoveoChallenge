@@ -26,7 +26,7 @@
 * Haven't been able to setup Karma + Jasmine with TypeScript properly just yet. So the tests aren't runnable.
 * Facets behavior isn't rock solid
 * Facets menu displays after footer on small devices
-* Gulp task to build for prod on Salesforce isn't implemented just yet (build-dev is used)
+* Gulp task to build for prod for Salesforce isn't implemented just yet (build-dev is used)
 
 ## TODOS
 * Setup Karma with TypeScript properly so that it runs smooth
