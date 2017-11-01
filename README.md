@@ -3,7 +3,7 @@
 
 **My solution:** [Hosted on Force.com !](http://gados-developer-edition.na73.force.com/coveochallenge)
 
-> **Notice:** My solution have been implemented and tested only for Google Chrome, other browsers are not supported at this stage. 
+> **Notice:** My solution has been implemented and tested only for Google Chrome, other browsers are not supported at this stage. 
 
 ## Dev stack chosen for this project
 * Backbone + Underscore
