@@ -10,12 +10,12 @@ module.exports = function (config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['jasmine'],
+		frameworks: ['jasmine', 'typescript'],
 
 
 		// list of files / patterns to load in the browser
 		files: [
-			'spec/**/*[sS]pec.ts'
+			'**/*.ts'
 		],
 
 
@@ -32,19 +32,23 @@ module.exports = function (config) {
 
 		typescriptPreprocessor: {
 			// options passed to the typescript compiler 
-			options: {
-				sourceMap: false, // (optional) Generates corresponding .map file. 
-				target: 'ES5', // (optional) Specify ECMAScript target version: 'ES3' (default), or 'ES5' 
-				//module: 'commonjs', // (optional) Specify module code generation: 'commonjs' or 'amd' 
-				noImplicitAny: false, // (optional) Warn on expressions and declarations with an implied 'any' type. 
-				noResolve: true, // (optional) Skip resolution and preprocessing. 
-				removeComments: true, // (optional) Do not emit comments to output. 
-				concatenateOutput: true // (optional) Concatenate and emit output to single file. By default true if module option is omited, otherwise false. 
+			tsconfigPath: './tsconfig.json', // *obligatory 
+			compilerOptions: { // *optional 
+			  removeComments: false
 			},
-			// transforming the filenames 
-			transformPath: function (path) {
-				return path.replace(/\.ts$/, '.js');
-			}
+			// Options passed to gulp-sourcemaps to create sourcemaps 
+			sourcemapOptions: {includeContent: true, sourceRoot: '/src'},
+			// ignore all files that ends with .d.ts (this files will not be served) 
+			ignorePath: function(path){ 
+			 return /\.d\.ts$/.test(path);
+			},
+			// transforming the filenames  
+			// you can pass more than one, they will be execute in order 
+			transformPath: [function(path) { // *optional 
+			  return path.replace(/\.ts$/, '.js');
+			}, function(path) {
+			   return path.replace(/[\/\\]test[\/\\]/i, '/'); // remove directory test and change to / 
+			}]
 		},
 
 

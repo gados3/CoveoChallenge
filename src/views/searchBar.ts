@@ -27,7 +27,7 @@ export class SearchBarView extends Backbone.View<Backbone.Model> {
 	}
 
 	public inputChange(e) {
-		this.searchCallback(escape(e.target.value));
+		this.searchCallback(e.target.value);
 	}
 
 	public sortCriteriaChange() {

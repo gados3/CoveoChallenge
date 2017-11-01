@@ -32,8 +32,6 @@ export class PaginationView extends Backbone.View<Backbone.Model> {
 	public render(pageCount?: number | undefined) {
 		if (pageCount) {
 			this.pageCount = pageCount;
-		}
-		if (this.pageCount) {
 			this.$el.html(PaginationView.template({
 				currentPage: this._currentPage,
 				pageCount: this.pageCount,
@@ -45,7 +43,6 @@ export class PaginationView extends Backbone.View<Backbone.Model> {
 		}
 		return this;
 	}
-
 
 	public nextPage(e) {
 		if (this._currentPage <= this.pageCount) {

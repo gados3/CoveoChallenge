@@ -35,17 +35,17 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 		this.init();
 	}
 
-	public render(options?, renderFacets: boolean = true): SeachView {
-		let tempQuery = (renderFacets) ?
-			$.extend(true, this.currentQuery, options) :
-			$.extend(true, {}, this.currentQuery, options);
+	public render(options?, dontOverrideFacets: boolean = false): SeachView {
+		this.currentQuery = $.extend(true, this.currentQuery, options);
 		this.results.fetch($.extend(true, {
 			firstResult: this.pagination.currentPage * this.pageLength,
 			numberOfResults: this.pageLength
-		}, tempQuery))
+		}, this.currentQuery, this.facetsView.getAdvencedQuery()))
 			.done((response) => {
 				this.$el.html(SeachView.template(response));
-				if (renderFacets) {
+				if (dontOverrideFacets) {
+					this.facetsView.updateUI(response.groupByResults);
+				} else {
 					this.facetsView.render(response.groupByResults);
 				}
 				this.pagination.render(response.totalCount / this.pageLength);
@@ -66,7 +66,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 	public userSearch(query: string) {
 		this.render({
 			enableDidYouMean: true,
-			q: escape(query)
+			q: query
 		});
 	}
 
@@ -79,7 +79,7 @@ export class SeachView extends Backbone.View<Backbone.Model> {
 		this.currentPage = 0;
 		this.render({
 			sortCriteria: criteria
-		});
+		}, true);
 	}
 
 	private init() {

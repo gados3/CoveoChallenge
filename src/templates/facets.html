@@ -6,17 +6,23 @@
         <div class="collapsible-body">
             <ul class="collection">
                 <% _.each(models, function(value) { %>
-                    <li class="collection-item">
-                        <input type="checkbox" name="<% print('facet'); %>" id="<% print('facet_' + field + '_' + value.get('value')); %>" data-field="<%= field %>" data-query="<%= value.get('value') %>">
-                        <label for="<% print('facet_' + field + '_' + value.get('value')); %>">
-                            <%= value.get('value') %>
-                        </label>
-                        <span class="badge">
-                            <%= value.get('numberOfResults') %>
-                        </span>
+                    <li class="collection-item facet">
+                        <div>
+                            <input type="checkbox" name="<% print('facet'); %>" id="<% print('facet_' + field + '_' + hashString(value.get('value'))); %>" data-field="<%= field %>"
+                                data-query="<%= value.get('value') %>">
+                            <label for="<% print('facet_' + field + '_' + hashString(value.get('value'))); %>">
+                                <%= value.get('value') %>
+                            </label>
+
+                        </div>
+                        <div>
+                            <span class="facet-count" name="<% print(field); %>" id="<% print('facet-count_' + field + '_' + hashString(value.get('value'))); %>">
+                                <%= value.get('numberOfResults') %>
+                            </span>
+                        </div>
                     </li>
-                <% }); %>
+                    <% }); %>
             </ul>
         </div>
     </li>
-<% } %>
+    <% } %>

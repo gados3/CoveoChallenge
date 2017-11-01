@@ -1,31 +1,46 @@
 <nav>
     <div class="nav-wrapper container">
-        <a href="#" class="brand-logo">SAQ Search</a>
+        <a class="brand-logo">SAQ Search</a>
     </div>
 </nav>
 <div id="content" class="row">
-    <div id="facets-wrapper" class="col s12 m4 l3 xl2">
-        <ul class="collapsible" data-collapsible="expandable"></ul>
-    </div>
-    <div id="right-content" class="col s12 m8 l9 xl10">
-        <div id="search-bar-wrapper" class="row"></div>
-        <div id="search-wrapper"></div>
-        <div class="pagination-wrapper" class="row"></div>
-        <footer class="page-footer">
+    <div id="right-content" class="col s12 m8 push-m4 l9 push-l3 xl10 push-xl2">
+        <div>
+            <div id="search-bar-wrapper" class="row"></div>
+            <div id="search-wrapper"></div>
+            <div class="pagination-wrapper" class="row"></div>
+        </div>
+        <div class="page-footer">
             <div class="container">
                 <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <div class="col s12">
+                        <h5 class="white-text">Coveo's Front End Coding Challenge</h5>
+                    </div>
+                    <div class="col s12">
+                        <p class="grey-text text-lighten-4 valign-wrapper">
+                            <!-- build:keepInDev -->
+                            <!-- <img id="me" src="./img/me.png" alt="me" class="responsive-img circle"> -->
+                            <!--endBuild  -->
+                            <!-- build:keepInProd -->
+                            <img id="me" src="/coveochallenge/resource/dist/dist/img/me.png" alt="me" class="responsive-img circle">
+                            <!--endBuild  -->
+                            <span>
+                                Source code of this page is available on
+                                <a href="https://github.com/gados3/CoveoChallenge">&nbsp;my GitHub</a>!
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    © 2014 Copyright Text
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    © 2017 Gaël Dostie
+                    <a class="right" href="https://github.com/coveo/frontend-coding-challenge">Official challenge</a>
                 </div>
             </div>
-        </footer>
+        </div>
+    </div>
+    <div id="facets-wrapper" class="col s12 m4 pull-m8 l3 pull-l9 xl2 pull-xl10">
+        <ul class="collapsible" data-collapsible="expandable"></ul>
     </div>
 </div>

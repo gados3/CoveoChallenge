@@ -8,21 +8,21 @@
             <a class="btn-floating" data-count="12">12</a>
         </ul>
     </div>
-    <p>
+    <p class="small-h-pad">
         <%= totalCount %>&nbsp;results found in&nbsp;
         <%= duration / 1000 %>&nbsp;seconds.
     </p>
 <% } else { %>
     <% if (queryCorrections.length > 0) { %>
         <div class="row">
-            <p class="flow-text">Did you mean
+            <p class="flow-text small-h-pad">Did you mean
                 <a class="qcorrection" data-query="<%= queryCorrections[0].correctedQuery %>">
                     <%= queryCorrections[0].correctedQuery %>
                 </a>?
             </p>
         </div>
     <% } else { %>
-        <p class="flow-text">Query returned no results.</p>
+        <p class="flow-text small-h-pad">Query returned no results.</p>
     <% } %>
 <% } %>
 <div id="results-wrapper" class="row"></div>

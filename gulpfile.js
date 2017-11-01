@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     rename = require('gulp-rename'),
     livereload = require('gulp-livereload'),
-    stringify = require('stringify');
+    stringify = require('stringify'),
+    htmlReplace = require('gulp-html-replace');
 
 gulp.task('clean', function () {
     return gulp.src('./dist', { read: false })
@@ -56,6 +57,11 @@ gulp.task('copy-libs', ['clean'], function () {
         .pipe(gulp.dest('dist/lib/js'));
 })
 
+gulp.task('copy-images', ['clean'], function () {
+    return gulp.src(['./assets/img/**/*.png', './assets/img/**/*.jpg'])
+        .pipe(gulp.dest('dist/img'));
+});
+
 gulp.task('styles', function () {
     gulp.src('./dist/css', { read: false })
         .pipe(clean());
@@ -67,11 +73,26 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('assets', ['copy-html', 'copy-fonts', 'copy-libs']);
-gulp.task('build-all', ['assets', 'scripts', 'styles']);
+gulp.task('assets', ['copy-html', 'copy-fonts', 'copy-libs', 'copy-images']);
+gulp.task('build-dev', ['assets', 'scripts', 'styles']);
 
 gulp.task('dev', ['scripts', 'styles'], function () {
     gulp.watch(['./src/**/*.ts', './src/templates/**/*.html'], ['scripts']);
     gulp.watch(['./src/**/*.scss'], ['styles']);
+});
+
+gulp.task('build-prod', function () {
+    gulp.src('./src/templates/**/*.html')
+        .pipe(htmlReplace({
+            'keepInDev': {
+                src: '',
+                tpl: '%s'
+            }
+        }, {
+                keepUnassigned: true,
+                keepBlockTags: false,
+                resolvePaths: false
+            }))
+        .pipe(gulp.dest('release/test'));
 });
 
